@@ -1,0 +1,225 @@
+/* ============================================
+   PDF PREVIEW — Full width, A4 ratio (210:297)
+   ============================================ */
+
+/* Break out dari padding accordion__body → full width */
+.pdf-section {
+  margin: var(--space-5) calc(-1 * var(--space-6));
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+/* Section terakhir menyentuh tepi bawah accordion */
+.pdf-section:last-child {
+  margin-bottom: var(--space-5);
+}
+
+/* ───── HEADER BAR (kategori / refleksi) ───── */
+.pdf-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  background: var(--bg-canvas-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.pdf-section__title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.pdf-section__title::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--paint-terracotta);
+  flex-shrink: 0;
+}
+
+.pdf-section__download {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--paint-terracotta);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid rgba(200, 107, 78, 0.35);
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  white-space: nowrap;
+}
+
+.pdf-section__download:hover {
+  background: var(--paint-terracotta);
+  color: var(--text-inverse);
+  border-color: var(--paint-terracotta);
+}
+
+/* ───── PDF EMBED: full width, A4 height ───── */
+.pdf-embed {
+  width: 100%;
+  aspect-ratio: 210 / 297;   /* A4 portrait */
+  border: none;
+  border-radius: 0;
+  display: block;
+  background: var(--bg-canvas-alt);
+  overflow: hidden;
+}
+
+/* ───── FALLBACK ketika PDF belum ada ───── */
+.pdf-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 400px;
+  padding: var(--space-8);
+  text-align: center;
+  gap: var(--space-3);
+  background: linear-gradient(135deg, var(--paint-terracotta-soft), var(--paint-mustard-soft));
+}
+
+.pdf-fallback__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--paint-terracotta);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-sm);
+  letter-spacing: 0.05em;
+}
+
+.pdf-fallback__title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.pdf-fallback__hint {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.pdf-fallback__hint code {
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  background: var(--bg-surface);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--paint-terracotta);
+  font-size: 0.72rem;
+  word-break: break-all;
+}
+
+/* ───── ARTEFAK: stacked full width (bukan grid) ───── */
+.pdf-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border);
+}
+
+.pdf-item:last-child {
+  border-bottom: none;
+}
+
+/* Label artefak → jadi header bar tiap PDF */
+.pdf-item__label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3) var(--space-6);
+  background: var(--bg-surface);
+  border-left: none;
+  position: relative;
+}
+
+/* Accent bar warna di kiri (konsisten dengan tema) */
+.pdf-item__label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--paint-mustard);
+}
+
+.pdf-item:nth-child(2) .pdf-item__label::before {
+  background: var(--paint-sage);
+}
+
+.pdf-item:nth-child(3) .pdf-item__label::before {
+  background: var(--paint-violet);
+}
+
+.pdf-item__label strong {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.pdf-item__label span {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ───── LANDSCAPE PDF (presentasi, mind map, diagram) ───── */
+.pdf-embed--landscape {
+  aspect-ratio: 297 / 180;   /* A4 landscape */
+}
+
+/* ───── RESPONSIVE ───── */
+@media (max-width: 640px) {
+  .pdf-section {
+    margin-left: calc(-1 * var(--space-4));
+    margin-right: calc(-1 * var(--space-4));
+  }
+
+  .pdf-section:last-child {
+    margin-bottom: calc(-1 * var(--space-4));
+  }
+
+  .pdf-section__header,
+  .pdf-item__label {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .pdf-fallback__hint code {
+    font-size: 0.65rem;
+  }
+}

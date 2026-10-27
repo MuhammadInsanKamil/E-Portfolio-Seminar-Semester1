@@ -1,0 +1,106 @@
+/* ============================================
+   FOOTER — Compact one-block
+   ============================================ */
+.footer {
+  position: relative;
+  margin-top: var(--space-16);
+  padding: var(--space-8) var(--container-padding);
+  border-top: 1px solid var(--border);
+  background: var(--bg-canvas-alt);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Subtle painterly accent */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -80%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--paint-terracotta) 0%, transparent 65%);
+  opacity: 0.08;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.footer__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Academic citation */
+.footer__academic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.footer__sep {
+  display: inline-block;
+  margin: 0 var(--space-2);
+  color: var(--paint-terracotta);
+  opacity: 0.7;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* Quote */
+.footer__quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.footer__quote-author {
+  display: inline-block;
+  margin-left: var(--space-1);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.68rem;
+  color: var(--paint-terracotta);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* ───── RESPONSIVE ───── */
+@media (max-width: 640px) {
+  .footer {
+    margin-top: var(--space-12);
+    padding: var(--space-6) var(--container-padding);
+  }
+
+  .footer__academic {
+    font-size: var(--font-size-xs);
+  }
+
+  .footer__academic .footer__sep {
+    display: none;
+  }
+
+  .footer__quote {
+    font-size: 0.72rem;
+  }
+
+  .footer__quote-author {
+    display: block;
+    margin-left: 0;
+    margin-top: var(--space-1);
+  }
+}

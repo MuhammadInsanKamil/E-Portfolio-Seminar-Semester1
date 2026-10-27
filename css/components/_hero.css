@@ -1,0 +1,433 @@
+/* ============================================
+   HERO — Abstract painting with portrait blob
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--navbar-height) + var(--space-12)) var(--container-padding) var(--space-16);
+  overflow: hidden;
+  background: var(--bg-canvas);
+}
+
+/* Painterly wash — big soft color fields */
+.hero__wash {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(90px);
+}
+
+.hero__wash--1 {
+  width: 620px;
+  height: 620px;
+  background: var(--paint-terracotta);
+  opacity: 0.24;
+  top: -18%;
+  right: -10%;
+  animation: driftWash 24s ease-in-out infinite;
+}
+
+.hero__wash--2 {
+  width: 480px;
+  height: 480px;
+  background: var(--paint-mustard);
+  opacity: 0.28;
+  bottom: -14%;
+  left: -6%;
+  animation: driftWash 28s ease-in-out infinite reverse;
+}
+
+.hero__wash--3 {
+  width: 380px;
+  height: 380px;
+  background: var(--paint-violet);
+  opacity: 0.18;
+  top: 50%;
+  right: 40%;
+  animation: driftWash 32s ease-in-out infinite;
+}
+
+@keyframes driftWash {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.06); }
+  66% { transform: translate(-25px, 25px) scale(0.96); }
+}
+
+/* Painted strokes — crisp decorative shapes */
+.hero__stroke {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__stroke--1 {
+  top: 22%;
+  left: 5%;
+  width: 90px;
+  height: 6px;
+  background: var(--paint-sage);
+  border-radius: 3px;
+  transform: rotate(-6deg);
+  opacity: 0.7;
+}
+
+.hero__stroke--2 {
+  bottom: 22%;
+  right: 6%;
+  width: 70px;
+  height: 5px;
+  background: var(--paint-navy);
+  border-radius: 3px;
+  transform: rotate(4deg);
+  opacity: 0.6;
+}
+
+.hero__stroke--3 {
+  top: 15%;
+  right: 12%;
+  width: 14px;
+  height: 14px;
+  background: var(--paint-rose);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.hero__stroke--4 {
+  bottom: 30%;
+  left: 8%;
+  width: 10px;
+  height: 10px;
+  background: var(--paint-terracotta);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* Container */
+.hero__container {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+/* Content */
+.hero__content {
+  max-width: 640px;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.hero__eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: var(--paint-terracotta);
+  border-radius: 1px;
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 6.5vw, var(--font-size-6xl));
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-6);
+  color: var(--text-primary);
+}
+
+.hero__title em {
+  font-style: italic;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+}
+
+.hero__title em::after {
+  content: '';
+  position: absolute;
+  bottom: 0.05em;
+  left: -0.06em;
+  right: -0.06em;
+  height: 0.28em;
+  background: var(--paint-mustard);
+  opacity: 0.55;
+  z-index: -1;
+  border-radius: 2px;
+  transform: skewX(-3deg) rotate(-0.5deg);
+}
+
+.hero__title-accent {
+  color: var(--paint-terracotta);
+}
+
+.hero__description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: var(--space-8);
+  max-width: 540px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+
+.hero__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.hero__meta-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+.hero__meta-value {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Visual: portrait in organic blob */
+.hero__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+}
+
+/* Color field behind portrait */
+.hero__visual::before {
+  content: '';
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: var(--blob-1);
+  background: var(--paint-terracotta);
+  opacity: 0.9;
+  top: 8%;
+  left: 8%;
+  z-index: 0;
+  animation: blobMorph 20s ease-in-out infinite;
+}
+
+.hero__visual::after {
+  content: '';
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: var(--blob-2);
+  background: var(--paint-mustard);
+  opacity: 0.85;
+  bottom: 10%;
+  right: 4%;
+  z-index: 0;
+  animation: blobMorph 24s ease-in-out infinite reverse;
+  mix-blend-mode: multiply;
+}
+
+@keyframes blobMorph {
+  0%, 100% {
+    border-radius: 62% 38% 46% 54% / 55% 52% 48% 45%;
+    transform: rotate(0deg);
+  }
+  33% {
+    border-radius: 43% 57% 62% 38% / 48% 55% 45% 52%;
+    transform: rotate(8deg);
+  }
+  66% {
+    border-radius: 55% 45% 38% 62% / 60% 42% 58% 40%;
+    transform: rotate(-6deg);
+  }
+}
+
+.hero__image-blob {
+  position: relative;
+  z-index: 1;
+  width: 380px;
+  height: 420px;
+  border-radius: var(--blob-3);
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 6px solid var(--bg-canvas);
+  box-shadow: var(--shadow-lg);
+  animation: blobMorph 22s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Floating tag */
+.hero__tag {
+  position: absolute;
+  z-index: 3;
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+  animation: floatY 5s ease-in-out infinite;
+}
+
+.hero__tag--1 {
+  top: 12%;
+  right: 0;
+  color: var(--paint-terracotta);
+  border-color: rgba(200, 107, 78, 0.3);
+}
+
+.hero__tag--2 {
+  bottom: 14%;
+  left: 0;
+  color: var(--paint-navy);
+  border-color: rgba(61, 90, 128, 0.3);
+  animation-delay: -2s;
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Scroll cue */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 3;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero {
+    padding-top: calc(var(--navbar-height) + var(--space-10));
+    min-height: auto;
+  }
+
+  .hero__container {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    text-align: center;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .hero__eyebrow {
+    justify-content: center;
+  }
+
+  .hero__description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__meta {
+    justify-content: center;
+  }
+
+  .hero__visual {
+    min-height: 400px;
+    order: -1;
+  }
+
+  .hero__image-blob {
+    width: 280px;
+    height: 320px;
+  }
+
+  .hero__visual::before,
+  .hero__visual::after {
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__image-blob {
+    width: 240px;
+    height: 280px;
+  }
+
+  .hero__visual::before,
+  .hero__visual::after {
+    width: 220px;
+    height: 220px;
+  }
+}

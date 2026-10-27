@@ -1,0 +1,125 @@
+/* ============================================
+   CARD — Clean with colorful accent
+   ============================================ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-5);
+}
+
+.card-grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--paint-terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Color variants */
+.card:nth-child(2)::before { background: var(--paint-mustard); }
+.card:nth-child(3)::before { background: var(--paint-sage); }
+.card:nth-child(4)::before { background: var(--paint-navy); }
+.card:nth-child(5)::before { background: var(--paint-rose); }
+.card:nth-child(6)::before { background: var(--paint-violet); }
+
+.card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--paint-terracotta-soft);
+  color: var(--paint-terracotta);
+  margin-bottom: var(--space-5);
+  transition: var(--transition);
+}
+
+.card:nth-child(2) .card__icon {
+  background: var(--paint-mustard-soft);
+  color: var(--paint-mustard);
+}
+
+.card:nth-child(3) .card__icon {
+  background: var(--paint-sage-soft);
+  color: var(--paint-sage);
+}
+
+.card:hover .card__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.card__title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.card__body {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.card__body ol {
+  counter-reset: list-counter;
+  list-style: none;
+  padding: 0;
+}
+
+.card__body ol li {
+  position: relative;
+  padding-left: var(--space-8);
+  margin-bottom: var(--space-3);
+  counter-increment: list-counter;
+}
+
+.card__body ol li::before {
+  content: counter(list-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--paint-terracotta);
+}

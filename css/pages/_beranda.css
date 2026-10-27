@@ -1,0 +1,79 @@
+/* ============================================
+   BERANDA PAGE
+   ============================================ */
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.stat {
+  position: relative;
+  padding: var(--space-8) var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  text-align: center;
+}
+
+/* Painterly color block behind number */
+.stat::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--paint-terracotta);
+  opacity: 0.18;
+  filter: blur(20px);
+  transition: var(--transition);
+}
+
+.stat:nth-child(2)::before { background: var(--paint-mustard); }
+.stat:nth-child(3)::before { background: var(--paint-sage); }
+.stat:nth-child(4)::before { background: var(--paint-violet); }
+
+.stat:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.stat:hover::before {
+  opacity: 0.3;
+  transform: translateX(-50%) scale(1.2);
+}
+
+.stat__number {
+  position: relative;
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-6xl);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.04em;
+}
+
+.stat__label {
+  position: relative;
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* CTA wrapper */
+.cta-wrapper {
+  text-align: center;
+  margin-top: var(--space-12);
+}

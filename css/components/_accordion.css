@@ -1,0 +1,283 @@
+/* ============================================
+   ACCORDION — Editorial with color-coded items
+   ============================================ */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.accordion__item {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.accordion__item:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.accordion__item.open {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+/* Colored vertical accent bar */
+.accordion__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--paint-terracotta);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s var(--ease-smooth);
+  z-index: 1;
+}
+
+.accordion__item:nth-child(2)::before { background: var(--paint-mustard); }
+.accordion__item:nth-child(3)::before { background: var(--paint-sage); }
+.accordion__item:nth-child(4)::before { background: var(--paint-navy); }
+.accordion__item:nth-child(5)::before { background: var(--paint-rose); }
+.accordion__item:nth-child(6)::before { background: var(--paint-violet); }
+
+.accordion__item:hover::before,
+.accordion__item.open::before {
+  transform: scaleY(1);
+}
+
+.accordion__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  text-align: left;
+  transition: var(--transition);
+}
+
+.accordion__trigger:hover {
+  background: var(--bg-canvas-alt);
+}
+
+.accordion__meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.accordion__label {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--paint-terracotta);
+  margin-bottom: var(--space-1);
+}
+
+.accordion__item:nth-child(2) .accordion__label { color: var(--paint-mustard); }
+.accordion__item:nth-child(3) .accordion__label { color: var(--paint-sage); }
+.accordion__item:nth-child(4) .accordion__label { color: var(--paint-navy); }
+.accordion__item:nth-child(5) .accordion__label { color: var(--paint-rose); }
+.accordion__item:nth-child(6) .accordion__label { color: var(--paint-violet); }
+
+.accordion__title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.accordion__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-canvas-alt);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.accordion__icon svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.accordion__item.open .accordion__icon {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.accordion__item.open .accordion__icon svg {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   CONTENT — Grid trick, tutup sempurna 0px
+   ============================================ */
+.accordion__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease-smooth);
+}
+
+.accordion__item.open .accordion__content {
+  grid-template-rows: 1fr;
+}
+
+.accordion__content > .accordion__body {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Padding horizontal saja — vertikal dipindah ke child */
+.accordion__body {
+  padding: 0 var(--space-6);
+}
+
+/* Jarak atas section pertama */
+.accordion__body > :first-child {
+  margin-top: var(--space-5);
+}
+
+/* Jarak bawah section terakhir (kalau bukan PDF) */
+.accordion__body > :last-child {
+  margin-bottom: var(--space-5);
+}
+
+/* PDF tetap full-width: sentuh tepi bawah akordeon */
+.accordion__body > .pdf-section:last-child {
+  margin-bottom: calc(-1 * var(--space-6));
+}
+
+/* ============================================
+   SECTION (C1–C4)
+   ============================================ */
+.accordion__section {
+  position: relative;
+  margin-bottom: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--bg-canvas-alt);
+  border-radius: var(--radius-md);
+}
+
+/* Colored dot markers */
+.accordion__section::before {
+  content: '';
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-2);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--paint-terracotta);
+}
+
+.accordion__section:nth-child(2)::before { background: var(--paint-mustard); }
+.accordion__section:nth-child(3)::before { background: var(--paint-sage); }
+.accordion__section:nth-child(4)::before { background: var(--paint-violet); }
+
+.accordion__section-title {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.accordion__section-title::before {
+  content: 'C';
+  display: inline-block;
+  margin-right: var(--space-2);
+  color: var(--paint-terracotta);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+
+.accordion__section:nth-child(2) .accordion__section-title::before { color: var(--paint-mustard); }
+.accordion__section:nth-child(3) .accordion__section-title::before { color: var(--paint-sage); }
+.accordion__section:nth-child(4) .accordion__section-title::before { color: var(--paint-violet); }
+
+.accordion__section p,
+.accordion__section li {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding-left: var(--space-4);
+}
+
+.accordion__section ul {
+  padding-left: var(--space-8);
+  list-style: none;
+  margin-top: var(--space-2);
+}
+
+.accordion__section ul li {
+  position: relative;
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-4);
+}
+
+.accordion__section ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   ARTEFAK BOX (legacy — tetap dipertahankan)
+   ============================================ */
+.artefak-box {
+  position: relative;
+  padding: var(--space-4) var(--space-5);
+  background: linear-gradient(135deg, var(--paint-sage-soft), var(--paint-navy-soft));
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-4);
+}
+
+.artefak-box .accordion__section-title {
+  color: var(--text-primary);
+  padding-left: var(--space-4);
+}
+
+.artefak-box .accordion__section-title::before {
+  content: '✦';
+  color: var(--paint-sage);
+}
+
+.artefak-box p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.artefak-box p:last-child {
+  margin-bottom: 0;
+}
+
+.artefak-box strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: var(--font-serif);
+  font-style: italic;
+}
